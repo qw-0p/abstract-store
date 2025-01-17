@@ -9,30 +9,23 @@ import {
   User,
   Rating,
 } from './models';
+import setupAssociations from '@db/models/associations';
+
+const isDev = process.env.NODE_ENV === 'development';
+const isTest = process.env.NODE_ENV === 'test';
 
 const init = async () => {
   try {
-    console.time();
-    await User.sync();
-    console.log('===> USERS table synchronized successfully. <===');
-    await Company.sync();
-    console.log('===> COMPANIES table synchronized successfully. <===');
-    await Category.sync();
-    console.log('===> CATEGORY table synchronized successfully. <===');
-    await Product.sync();
-    console.log('===> PRODUCTS table synchronized successfully. <===');
-    await Basket.sync();
-    console.log('===> BASKETS table synchronized successfully. <===');
-    await TypeProduct.sync();
-    console.log('===> TYPE_PRODUCT table synchronized successfully. <===');
-    await BasketProduct.sync();
-    console.log('===> BASKET_PRODUCT table synchronized successfully. <===');
-    await ProductInfo.sync();
-    console.log('===> PRODUCT_INFO table synchronized successfully. <===');
-    await Rating.sync();
-    console.log('===> RATING table synchronized successfully. <===');
-    console.log('All tables synchronized successfully.');
-    console.timeEnd();
+    setupAssociations();
+    await User.sync({ alter: isDev || isTest });
+    await Company.sync({ alter: isDev || isTest });
+    await Category.sync({ alter: isDev || isTest });
+    await Product.sync({ alter: isDev || isTest });
+    await Basket.sync({ alter: isDev || isTest });
+    await TypeProduct.sync({ alter: isDev || isTest });
+    await BasketProduct.sync({ alter: isDev || isTest });
+    await ProductInfo.sync({ alter: isDev || isTest });
+    await Rating.sync({ alter: isDev || isTest });
   } catch (error) {
     console.error('Error synchronizing tables:', error);
   }

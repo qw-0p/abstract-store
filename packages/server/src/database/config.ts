@@ -1,7 +1,5 @@
 import { Dialect, Sequelize } from 'sequelize';
 
-const isDev = process.env.NODE_ENV === 'development';
-
 const dbName = process.env.DB_NAME as string;
 const dbUser = process.env.DB_USER as string;
 const dbHost = process.env.DB_HOST as string;
@@ -13,7 +11,7 @@ const dbConnection = new Sequelize(dbName, dbUser, dbPassword, {
   dialect: dbDialect,
   host: dbHost,
   port: dbPort,
-  ...(!isDev && { logging: false }),
+  logging: false,
 });
 
 export default dbConnection;

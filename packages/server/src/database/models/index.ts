@@ -7,5 +7,3 @@ export { default as ProductInfo } from './ProductInfo';
 export { default as Company } from './Company';
 export { default as Rating } from './Rating';
 export { default as TypeProduct } from './CategoryProduct';
-
-import './associations';

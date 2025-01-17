@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
+dotenv.config({ path: `./env/.env.${process.env.NODE_ENV}` });
 import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
 import 'express-async-errors';
