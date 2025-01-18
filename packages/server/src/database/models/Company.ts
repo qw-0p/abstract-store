@@ -9,7 +9,7 @@ import sequelize from '../config';
 import { User } from '.';
 
 interface CompanyAttributes {
-  id: CreationOptional<number>;
+  id: number;
   name: string;
   logo?: string;
   ownerId: ForeignKey<User['id']>;
@@ -30,8 +30,8 @@ class Company
   declare logo: string;
   declare ownerId: ForeignKey<User['id']>;
 
-  declare readonly createdAt?: CreationOptional<Date>;
-  declare readonly updatedAt?: CreationOptional<Date>;
+  declare readonly createdAt: CreationOptional<Date>;
+  declare readonly updatedAt: CreationOptional<Date>;
 }
 
 Company.init(

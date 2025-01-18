@@ -33,7 +33,7 @@ export const get = () => {
   });
 
   app.use(endpoint, routes);
-  // app.use(errorsMiddleware);
+  app.use(errorsMiddleware);
 
   return app;
 };

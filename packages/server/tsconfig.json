@@ -12,7 +12,8 @@
       "@middlewares/*": ["api/middlewares/*"],
       "@pTypes/*": ["types/*"],
       "@api/*": ["api/*"]
-    }
+    },
+    "typeRoots": ["./node_modules/@types", "./src/types"],
   },
   "esModuleInterop": true,
   "skipLibCheck": true,
