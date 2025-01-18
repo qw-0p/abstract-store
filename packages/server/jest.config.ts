@@ -19,6 +19,7 @@ const config: JestConfigWithTsJest = {
     '@api/*': ['api/*'],
   }),
   globalSetup: '<rootDir>/env/dotenv-test.ts',
+  setupFilesAfterEnv: ['<rootDir>/__tests__/jest.setup.ts'],
 };
 
 export default config;
