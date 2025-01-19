@@ -20,7 +20,7 @@ describe('User Data Access Layer', () => {
     it('should create and return an object of user', async () => {
       createdUser = await userDal.create(payload);
 
-      expect(createdUser).not.toBeNull();
+      expect(createdUser).toBeInstanceOf(User);
     });
   });
 

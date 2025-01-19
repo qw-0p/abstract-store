@@ -27,12 +27,12 @@ describe('Product Data Layer', () => {
 
       const product = await productDal.create(payload);
       productId = product.id;
-      expect(product).not.toBeNull();
+      expect(product).toBeInstanceOf(Product);
     });
   });
 
   describe('Get all products', () => {
-    it('should return an object of count and array of products', async () => {
+    it('should return an object of count and array of product', async () => {
       const products = await productDal.findAndCountAll({});
       expect(products.count).toBeGreaterThan(0);
     });
