@@ -9,12 +9,11 @@
     "type": "git",
     "url": "git+https://github.com/qw-0p/grocery-store.git"
   },
-  "author": "",
+  "author": "Oleksandr Sarkisov",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/qw-0p/grocery-store/issues"
   },
-  "homepage": "https://github.com/qw-0p/grocery-store#readme",
   "workspaces": [
     "packages/*"
   ],
