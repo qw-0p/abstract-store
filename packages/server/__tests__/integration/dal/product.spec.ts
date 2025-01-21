@@ -22,9 +22,6 @@ describe('Product Data Layer', () => {
 
   describe('Create product', () => {
     it('should create and return an object of product', async () => {
-      payload['ownerId'] = global.testUserId;
-      payload['companyId'] = global.testCompanyId;
-
       const product = await productDal.create(payload);
       productId = product.id;
       expect(product).toBeInstanceOf(Product);

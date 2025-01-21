@@ -10,7 +10,6 @@ export abstract class CustomError extends Error {
 
   protected constructor(message: string) {
     super(message);
-
     Object.setPrototypeOf(this, CustomError.prototype);
   }
 }

@@ -9,11 +9,11 @@ describe('User Data Access Layer', () => {
   };
 
   beforeAll(async () => {
-    await User.destroy({ where: {} });
+    await User.truncate({ cascade: true });
   });
 
   afterAll(async () => {
-    await User.destroy({ where: {} });
+    await User.truncate({ cascade: true });
   });
 
   describe('Create user', () => {

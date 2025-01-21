@@ -1,13 +1,18 @@
 import { Company } from '@db/models';
 import * as companyDal from '@db/dal/company';
+import * as generateData from '../../generateData';
 
 describe('Company Data Layer', () => {
+  let userId: number;
+
   beforeAll(async () => {
-    await Company.destroy({ where: {} });
+    await Company.truncate({ cascade: true });
+    userId = (await generateData.createUser()).id;
   });
 
   afterAll(async () => {
-    await Company.destroy({ where: {} });
+    await Company.truncate({ cascade: true });
+    await generateData.clearUsers();
   });
 
   const payload = {
@@ -18,8 +23,7 @@ describe('Company Data Layer', () => {
 
   describe('Create company', () => {
     it('should create and return an object of company', async () => {
-      payload['ownerId'] = global.testUserId;
-
+      payload['ownerId'] = userId;
       const company = await companyDal.create(payload);
       expect(company).toBeInstanceOf(Company);
     });

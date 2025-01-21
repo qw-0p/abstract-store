@@ -1,35 +1,36 @@
 import * as categoryDal from '@db/dal/category';
-import Category from '@db/models/Category';
+import Category, { CategoryOutput } from '@db/models/Category';
+import * as generateData from '../../generateData';
 
 describe('Category Data Layer', () => {
+  let userId: number;
+  const payload = {
+    name: `Category name-${Date.now()}`,
+    ownerId: 1,
+  };
+  let createdCategory: CategoryOutput;
+
   beforeAll(async () => {
-    await Category.destroy({ where: {} });
+    userId = (await generateData.createUser()).id;
+    await Category.truncate({ cascade: true });
   });
 
   afterAll(async () => {
-    await Category.destroy({ where: {} });
+    await Category.truncate({ cascade: true });
+    await generateData.clearUsers();
   });
-
-  const payload = {
-    name: 'New category',
-    ownerId: 1,
-  };
-
-  let categoryId: number = 1;
 
   describe('Create category', () => {
     it('should create and return an object of category', async () => {
-      payload['ownerId'] = global.testUserId;
-
-      const category = await categoryDal.create(payload);
-      categoryId = category.id;
-      expect(category).toBeInstanceOf(Category);
+      payload['ownerId'] = userId;
+      createdCategory = await categoryDal.create(payload);
+      expect(createdCategory).toBeInstanceOf(Category);
     });
   });
 
   describe('Delete category by id', () => {
     it('should delete category by id and return a boolean', async () => {
-      const deleteCategory = await categoryDal.deleteById(categoryId);
+      const deleteCategory = await categoryDal.deleteById(createdCategory.id);
       expect(deleteCategory).toBeTruthy();
     });
   });
