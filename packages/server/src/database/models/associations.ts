@@ -28,20 +28,24 @@ Product.belongsTo(Category, { foreignKey: 'category_id', targetKey: 'id' });
 Company.hasMany(Product, { foreignKey: 'company_id', sourceKey: 'id' });
 Product.belongsTo(Company, { foreignKey: 'company_id', targetKey: 'id' });
 
-User.hasMany(Rating);
-Rating.belongsTo(User);
+User.hasMany(Rating, { foreignKey: 'user_id', sourceKey: 'id' });
+Rating.belongsTo(User, { foreignKey: 'user_id', targetKey: 'id' });
 
-Basket.hasMany(BasketProduct);
-BasketProduct.belongsTo(Basket);
+Basket.hasMany(BasketProduct, { foreignKey: 'basket_id', sourceKey: 'id' });
+BasketProduct.belongsTo(Basket, { foreignKey: 'basket_id', targetKey: 'id' });
 
-Product.hasMany(Rating);
-Rating.belongsTo(Product);
+Product.hasMany(Rating, { foreignKey: 'product_id', sourceKey: 'id' });
+Rating.belongsTo(Product, { foreignKey: 'product_id', targetKey: 'id' });
 
-Product.hasMany(BasketProduct);
-BasketProduct.belongsTo(Product);
+Product.hasMany(BasketProduct, { foreignKey: 'product_id', sourceKey: 'id' });
+BasketProduct.belongsTo(Product, { foreignKey: 'product_id', targetKey: 'id' });
 
-Product.hasMany(ProductInfo, { as: 'info' });
-ProductInfo.belongsTo(Product);
+Product.hasMany(ProductInfo, {
+  as: 'info',
+  foreignKey: 'product_id',
+  sourceKey: 'id',
+});
+ProductInfo.belongsTo(Product, { foreignKey: 'product_id', targetKey: 'id' });
 
 Category.belongsToMany(Company, { through: TypeProduct });
 Company.belongsToMany(Category, { through: TypeProduct });
