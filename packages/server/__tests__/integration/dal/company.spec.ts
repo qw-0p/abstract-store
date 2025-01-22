@@ -2,12 +2,8 @@ import { Company } from '@db/models';
 import * as companyDal from '@db/dal/company';
 
 describe('Company Data Layer', () => {
-  beforeAll(async () => {
-    await Company.truncate({ cascade: true });
-  });
-
   afterAll(async () => {
-    await Company.truncate({ cascade: true });
+    await Company.destroy({ cascade: true, truncate: true, force: true });
   });
 
   const payload = {

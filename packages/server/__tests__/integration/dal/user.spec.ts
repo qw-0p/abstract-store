@@ -8,12 +8,8 @@ describe('User Data Access Layer', () => {
     password: 'hashedpassword',
   };
 
-  beforeAll(async () => {
-    await User.truncate({ cascade: true });
-  });
-
   afterAll(async () => {
-    await User.truncate({ cascade: true });
+    await User.destroy({ cascade: true, truncate: true, force: true });
   });
 
   describe('Create user', () => {
