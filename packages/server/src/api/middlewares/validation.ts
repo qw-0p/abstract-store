@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import schemas from '../validations';
 import ValidationError from '@errors/ValidationError';
-import { CustomRequest } from '@pTypes/requests';
 
 const validationOptions = {
   abortEarly: false,

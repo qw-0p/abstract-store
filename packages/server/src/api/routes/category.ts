@@ -3,7 +3,6 @@ import * as categoryController from '@api/controllers/category';
 import { authMiddleware } from '@api/middlewares/auth';
 import { CustomRequest } from '@pTypes/requests';
 import BadRequestError from '@errors/BadRequestError';
-import { deleteById } from '@api/controllers/category';
 
 const categoryRouter = Router();
 
