@@ -1,5 +1,6 @@
 import * as categoryDal from '@db/dal/category';
 import Category, { CategoryOutput } from '@db/models/Category';
+import sequelize from '@db/config';
 
 describe('Category Data Layer', () => {
   let createdCategory: CategoryOutput;
@@ -8,10 +9,12 @@ describe('Category Data Layer', () => {
     ownerId: 1,
   };
   beforeAll(async () => {
-    await Category.destroy({ where: {} });
+    await sequelize.query("SET session_replication_role = 'replica';");
+    await Category.truncate({ cascade: true });
   });
 
   afterAll(async () => {
+    await sequelize.query("SET session_replication_role = 'origin';");
     await Category.destroy({ where: {}, force: true });
   });
 

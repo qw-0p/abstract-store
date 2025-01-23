@@ -8,5 +8,6 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
+  await sequelize.query("SET session_replication_role = 'origin';");
   await sequelize.close();
 });

@@ -6,7 +6,13 @@ import {
 } from '@db/services/ProductService';
 import * as productDal from '@db/dal/product';
 
-jest.mock('@db/dal/product');
+jest.mock('@db/dal/product', () => ({
+  create: jest.fn(),
+  updateById: jest.fn(),
+  deleteById: jest.fn(),
+  findAndCountAll: jest.fn(),
+  checkSlugExists: jest.fn(),
+}));
 
 describe('Product Service', () => {
   const mockProduct = {

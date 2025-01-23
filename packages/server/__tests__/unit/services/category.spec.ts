@@ -1,7 +1,10 @@
 import { create } from '@db/services/CategoryService';
 import * as categoryDal from '@db/dal/category';
 
-jest.mock('@db/dal/category');
+jest.mock('@db/dal/category', () => ({
+  create: jest.fn(),
+  deleteById: jest.fn(),
+}));
 
 describe('Category Service', () => {
   const mockCategory = {

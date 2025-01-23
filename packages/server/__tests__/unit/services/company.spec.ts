@@ -1,7 +1,9 @@
 import { create } from '@db/services/CompanyService';
 import * as companyDal from '@db/dal/company';
 
-jest.mock('@db/dal/company');
+jest.mock('@db/dal/company', () => ({
+  create: jest.fn(),
+}));
 
 describe('Company Service', () => {
   const mockCompany = {

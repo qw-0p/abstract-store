@@ -1,30 +1,39 @@
+import Product, { ProductInput } from '@db/models/Product';
 import * as productDal from '@db/dal/product';
-import { Product } from '@db/models';
+import sequelize from '@db/config';
+
+const createProduct = async (options: ProductInput) => {
+  return await Product.create(options);
+};
 
 describe('Product Data Layer', () => {
-  let productId: number;
+  let createdProduct: Product;
   const payload = {
-    name: 'New Product',
-    price: 200,
+    name: 'New Product Name',
+    price: 321,
     companyId: 1,
-    description: 'Product description',
+    description: 'New Description',
     ownerId: 1,
-    slug: 'new-product',
+    slug: 'new-product-name',
   };
 
   beforeAll(async () => {
+    await sequelize.query("SET session_replication_role = 'replica';");
     await Product.destroy({ where: {}, force: true });
   });
 
   beforeEach(async () => {
-    const product = await productDal.create(payload);
-    productId = product.id;
+    createdProduct = await createProduct(payload);
   });
 
   afterEach(async () => {
     await Product.destroy({ where: {}, force: true });
   });
 
+  afterAll(async () => {
+    await sequelize.query("SET session_replication_role = 'origin';");
+    await Product.truncate({ cascade: true });
+  });
   describe('Create product', () => {
     it('should create and return a Product instance', async () => {
       const product = await productDal.create({
@@ -43,8 +52,9 @@ describe('Product Data Layer', () => {
 
   describe('Get all products', () => {
     it('should return count and array of products', async () => {
-      const { count } = await productDal.findAndCountAll({});
-      expect(count).toBeGreaterThan(0);
+      const result = await productDal.findAndCountAll({});
+
+      expect(result.count).toBeGreaterThan(0);
     });
   });
 
@@ -56,7 +66,7 @@ describe('Product Data Layer', () => {
       };
 
       const updatedProduct = await productDal.updateById(
-        productId,
+        createdProduct.id,
         updatedData,
       );
       expect(updatedProduct.name).toEqual(updatedData.name);
@@ -66,7 +76,8 @@ describe('Product Data Layer', () => {
 
   describe('Delete product by id', () => {
     it('should delete product by id and return boolean', async () => {
-      const isDeleted = await productDal.deleteById(productId);
+      const isDeleted = await productDal.deleteById(createdProduct.id);
+
       expect(isDeleted).toBeTruthy();
     });
   });
