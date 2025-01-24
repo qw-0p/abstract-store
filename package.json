@@ -3,14 +3,16 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "lint:server": "eslint ./packages/server"
+    "lint:server": "eslint ./packages/server",
+    "lint:client": "eslint ./packages/client",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/qw-0p/grocery-store.git"
   },
   "author": "Oleksandr Sarkisov",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/qw-0p/grocery-store/issues"
   },
