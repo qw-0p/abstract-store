@@ -7,6 +7,7 @@ npm-shrinkwrap.json
 *.gz
 .idea
 
+
 # Coveralls
 .nyc_output
 coverage
@@ -14,9 +15,11 @@ coverage
 .env.development
 .env.production
 .env.test
+pgdata
 
 # Benchmarking
 benchmarks/graphs
+
 
 # ignore additional files using core.excludesFile
 # https://git-scm.com/docs/gitignore
