@@ -4,6 +4,7 @@
     "types": ["jest", "node", "express"],
     "moduleResolution": "node",
     "baseUrl": "./src",
+    "outDir": "./dist",
     "paths": {
       "@/*": ["src/*"],
       "@utils/*": ["utils/*"],
